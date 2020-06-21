@@ -32,7 +32,7 @@ class Job(models.Model):
     salary = models.IntegerField(default=0)
     experience = models.IntegerField(default=0)
     published_at = models.DateField(auto_now=True)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=image_upload)
 
     slug = models.SlugField(null=True, blank=True)
@@ -43,3 +43,16 @@ class Job(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Job, self).save(*args, **kwargs)
+
+
+class Applicant(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
+    website = models.URLField(max_length=200)
+    cv = models.FileField(upload_to='resumes/')
+    cover_letter = models.TextField(max_length=500)
+    applied_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.name
