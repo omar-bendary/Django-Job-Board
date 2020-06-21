@@ -20,9 +20,8 @@ def image_upload(instance, filename):
 class Job(models.Model):
 
     JOB_TYPE = [
-        ('Junior', 'Junior'),
-        ('Senior', 'Senior'),
-        ('Team Leader', 'Team Leader')
+        ('Full Time', 'Full Time'),
+        ('Part Time', 'Part Time'),
     ]
     title = models.CharField(max_length=50)
     # loaction
