@@ -9,6 +9,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+# Customize iamge name when uploaded
+
+
+def image_upload(instance, filename):
+    image_name, extention = filename.split(".")
+    return "jobs/%s.%s" % (instance.id, extention)
+
 
 class Job(models.Model):
 
@@ -26,6 +33,7 @@ class Job(models.Model):
     experience = models.IntegerField(default=0)
     published_at = models.DateField(auto_now=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=image_upload)
 
     def __str__(self):
         return self.title
