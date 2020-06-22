@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -19,6 +20,7 @@ def image_upload(instance, filename):
 
 
 class Job(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     JOB_TYPE = [
         ('Full Time', 'Full Time'),
