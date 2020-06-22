@@ -28,13 +28,15 @@ def job_detail(request, slug):
         form = ApplicantForm(request.POST, request.FILES)
         if form.is_valid():
             myform = form.save(commit=False)
-            myform.job = job_detail
+            myform.job = job
             myform.save()
-        else:
-            form = ApplicantForm()
+
+    else:
+        form = ApplicantForm()
 
     context = {
-        'job': job
+        'job': job,
+        'form': form
 
     }
     return render(request, 'job/job_detail.html', context)
