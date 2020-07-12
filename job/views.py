@@ -11,12 +11,13 @@ from django.urls import reverse
 def job_list(request):
     jobs = Job.objects.all()
 
-    paginator = Paginator(jobs, 5)  # Show 2 contacts per page.
+    paginator = Paginator(jobs, 5)  # Show 5 contacts per page.
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        'jobs': page_obj
+        'jobs': page_obj,
+        'jobs_num': jobs
 
     }
     return render(request, 'job/job_list.html', context)
