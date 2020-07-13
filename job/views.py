@@ -25,6 +25,7 @@ def job_list(request):
 
 def job_detail(request, slug):
     job = Job.objects.get(slug=slug)
+    form = ApplicantForm()
 
     if request.method == 'POST':
         form = ApplicantForm(request.POST, request.FILES)
@@ -32,9 +33,6 @@ def job_detail(request, slug):
             myform = form.save(commit=False)
             myform.job = job
             myform.save()
-
-    else:
-        form = ApplicantForm()
 
     context = {
         'job': job,
